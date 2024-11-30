@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client'; 
 import Dashboard from './components/Dashboard';
 import HotelList from './components/HotelList';
 import FoodList from './components/FoodList';
@@ -34,3 +34,12 @@ const navLinkStyle = { color: 'white', textDecoration: 'none' };
 const mainContentStyle = { marginTop: '20px', padding: '20px' };
 
 export default App;
+
+// Rendering the App component with React 18's createRoot
+const rootElement = document.getElementById('root');
+const root = ReactDOM.createRoot(rootElement); // Create root with createRoot API
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
