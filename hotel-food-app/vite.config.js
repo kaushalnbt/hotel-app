@@ -8,4 +8,10 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    esbuild: {
+        loader: {
+            '.js': 'jsx',  // Treat .js files as JSX
+        },
+        jsx: 'react',  // Explicitly enable React JSX transformation
+    },
 });
