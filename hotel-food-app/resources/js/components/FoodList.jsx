@@ -1,22 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { getFoods } from '../services/api';
 
 const FoodList = () => {
-  const [foods, setFoods] = useState([]);
+  const [foods, setFoods] = useState([
+    { id: 1, name: 'Pizza', hotel: { name: 'Hotel A' } },
+    { id: 2, name: 'Burger', hotel: { name: 'Hotel B' } },
+  ]);
   const [search, setSearch] = useState('');
-
-  useEffect(() => {
-    const fetchFoods = async () => {
-      try {
-        const response = await getFoods(search);
-        setFoods(response.data.data);
-      } catch (error) {
-        console.error('Error fetching foods:', error);
-      }
-    };
-
-    fetchFoods();
-  }, [search]);
 
   return (
     <div>
@@ -28,11 +17,13 @@ const FoodList = () => {
         placeholder="Search foods..."
       />
       <ul>
-        {foods.map((food) => (
-          <li key={food.id}>
-            {food.name} - {food.hotel.name}
-          </li>
-        ))}
+        {foods
+          .filter(food => food.name.toLowerCase().includes(search.toLowerCase()))
+          .map((food) => (
+            <li key={food.id}>
+              {food.name} - {food.hotel.name}
+            </li>
+          ))}
       </ul>
     </div>
   );

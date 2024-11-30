@@ -1,22 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { getHotels } from '../services/api';
 
 const HotelList = () => {
-  const [hotels, setHotels] = useState([]);
+  const [hotels, setHotels] = useState([
+    { id: 1, name: 'Hotel A', location: 'Location A' },
+    { id: 2, name: 'Hotel B', location: 'Location B' },
+  ]);
   const [search, setSearch] = useState('');
-
-  useEffect(() => {
-    const fetchHotels = async () => {
-      try {
-        const response = await getHotels(search);
-        setHotels(response.data.data);
-      } catch (error) {
-        console.error('Error fetching hotels:', error);
-      }
-    };
-
-    fetchHotels();
-  }, [search]);
 
   return (
     <div>
@@ -28,11 +17,13 @@ const HotelList = () => {
         placeholder="Search hotels..."
       />
       <ul>
-        {hotels.map((hotel) => (
-          <li key={hotel.id}>
-            {hotel.name} - {hotel.location}
-          </li>
-        ))}
+        {hotels
+          .filter(hotel => hotel.name.toLowerCase().includes(search.toLowerCase()))
+          .map((hotel) => (
+            <li key={hotel.id}>
+              {hotel.name} - {hotel.location}
+            </li>
+          ))}
       </ul>
     </div>
   );

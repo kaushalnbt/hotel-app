@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { getDashboardData } from '../services/api';
 
 const Dashboard = () => {
   const [dashboardData, setDashboardData] = useState(null);
 
   useEffect(() => {
-    const fetchDashboardData = async () => {
-      try {
-        const response = await getDashboardData();
-        setDashboardData(response.data.data);
-      } catch (error) {
-        console.error('Error fetching dashboard data:', error);
-      }
-    };
-
-    fetchDashboardData();
+    // Fetch data here (for now, we'll use dummy data)
+    setDashboardData({
+      totalHotels: 50,
+      totalFoods: 200,
+      monthlyData: [
+        { month: 'January', year: 2024, total: 25 },
+        { month: 'February', year: 2024, total: 40 },
+      ],
+    });
   }, []);
 
   if (!dashboardData) {
