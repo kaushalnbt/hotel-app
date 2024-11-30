@@ -2,16 +2,16 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
-    plugins: [
-        laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
-            refresh: true,
-        }),
-    ],
-    esbuild: {
-        loader: {
-            '.js': 'jsx',  // Treat .js files as JSX
-        },
-        jsx: 'react',  // Explicitly enable React JSX transformation
+  plugins: [
+    laravel({
+      input: ['resources/js/app.jsx', 'resources/css/app.css'], // Make sure this points to the correct JS file
+      refresh: true,
+    }),
+  ],
+  esbuild: {
+    loader: {
+      '.js': 'jsx',
     },
+    jsx: 'react',
+  },
 });
